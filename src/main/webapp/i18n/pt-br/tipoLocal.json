@@ -1,0 +1,11 @@
+{
+  "freejobApp": {
+    "TipoLocal": {
+      "null": "",
+      "BAR": "BAR",
+      "RESTAURANTE": "RESTAURANTE",
+      "ESTADIO": "ESTADIO",
+      "BUFFET": "BUFFET"
+    }
+  }
+}

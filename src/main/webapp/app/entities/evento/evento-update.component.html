@@ -1,0 +1,97 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-evento-heading" jhiTranslate="freejobApp.evento.home.createOrEditLabel">Create or edit a Evento</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.evento.nomeEvento" for="field_nomeEvento">Nome Evento</label>
+                    <input type="text" class="form-control" name="nomeEvento" id="field_nomeEvento"
+                           formControlName="nomeEvento"/>
+                    <div *ngIf="editForm.get('nomeEvento').invalid && (editForm.get('nomeEvento').dirty || editForm.get('nomeEvento').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nomeEvento').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nomeEvento').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.evento.descricaEvento" for="field_descricaEvento">Descrica Evento</label>
+                    <input type="text" class="form-control" name="descricaEvento" id="field_descricaEvento"
+                           formControlName="descricaEvento"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.evento.dataInicio" for="field_dataInicio">Data Inicio</label>
+                    <div class="d-flex">
+                        <input id="field_dataInicio" type="datetime-local" class="form-control" name="dataInicio" formControlName="dataInicio" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('dataInicio').invalid && (editForm.get('dataInicio').dirty || editForm.get('dataInicio').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('dataInicio').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('dataInicio').errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.evento.dataFim" for="field_dataFim">Data Fim</label>
+                    <div class="d-flex">
+                        <input id="field_dataFim" type="datetime-local" class="form-control" name="dataFim" formControlName="dataFim" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('dataFim').invalid && (editForm.get('dataFim').dirty || editForm.get('dataFim').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('dataFim').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('dataFim').errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.evento.statusJob" for="field_statusJob">Status Job</label>
+                    <input type="checkbox" class="form-control" name="statusJob" id="field_statusJob"
+                           formControlName="statusJob"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.evento.tipoEvento" for="field_tipoEvento">Tipo Evento</label>
+                    <select class="form-control" name="tipoEvento" formControlName="tipoEvento" id="field_tipoEvento">
+                        <option value="PANFLETAGEM">{{'freejobApp.TipoEvento.PANFLETAGEM' | translate}}</option>
+                        <option value="FESTA">{{'freejobApp.TipoEvento.FESTA' | translate}}</option>
+                        <option value="CASAMENTO">{{'freejobApp.TipoEvento.CASAMENTO' | translate}}</option>
+                        <option value="FORMATURA">{{'freejobApp.TipoEvento.FORMATURA' | translate}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.evento.job" for="field_job">Job</label>
+                    <select class="form-control" id="field_job" name="job" formControlName="job">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="jobOption.id === editForm.get('job').value?.id ? editForm.get('job').value : jobOption" *ngFor="let jobOption of jobs; trackBy: trackJobById">{{jobOption.nomeJob}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

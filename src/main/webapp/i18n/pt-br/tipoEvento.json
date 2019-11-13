@@ -1,0 +1,11 @@
+{
+  "freejobApp": {
+    "TipoEvento": {
+      "null": "",
+      "PANFLETAGEM": "PANFLETAGEM",
+      "FESTA": "FESTA",
+      "CASAMENTO": "CASAMENTO",
+      "FORMATURA": "FORMATURA"
+    }
+  }
+}

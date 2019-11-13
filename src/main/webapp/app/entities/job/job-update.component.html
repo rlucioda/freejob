@@ -1,0 +1,86 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-job-heading" jhiTranslate="freejobApp.job.home.createOrEditLabel">Create or edit a Job</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.job.nomeJob" for="field_nomeJob">Nome Job</label>
+                    <input type="text" class="form-control" name="nomeJob" id="field_nomeJob"
+                           formControlName="nomeJob"/>
+                    <div *ngIf="editForm.get('nomeJob').invalid && (editForm.get('nomeJob').dirty || editForm.get('nomeJob').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nomeJob').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nomeJob').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 100 }">
+                        This field cannot be longer than 100 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.job.valorHora" for="field_valorHora">Valor Hora</label>
+                    <input type="number" class="form-control" name="valorHora" id="field_valorHora"
+                           formControlName="valorHora"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.job.tempoEvento" for="field_tempoEvento">Tempo Evento</label>
+                    <input type="number" class="form-control" name="tempoEvento" id="field_tempoEvento"
+                           formControlName="tempoEvento"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.job.observacao" for="field_observacao">Observacao</label>
+                    <input type="text" class="form-control" name="observacao" id="field_observacao"
+                           formControlName="observacao"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.job.dataPagamento" for="field_dataPagamento">Data Pagamento</label>
+                    <div class="d-flex">
+                        <input id="field_dataPagamento" type="datetime-local" class="form-control" name="dataPagamento" formControlName="dataPagamento" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.job.tipoPagamento" for="field_tipoPagamento">Tipo Pagamento</label>
+                    <select class="form-control" name="tipoPagamento" formControlName="tipoPagamento" id="field_tipoPagamento">
+                        <option value="DINHEIRO">{{'freejobApp.TipoPagamento.DINHEIRO' | translate}}</option>
+                        <option value="TRANSFERENCIA">{{'freejobApp.TipoPagamento.TRANSFERENCIA' | translate}}</option>
+                        <option value="CARTAO">{{'freejobApp.TipoPagamento.CARTAO' | translate}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.job.statusPagamento" for="field_statusPagamento">Status Pagamento</label>
+                    <input type="checkbox" class="form-control" name="statusPagamento" id="field_statusPagamento"
+                           formControlName="statusPagamento"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.job.agencia" for="field_agencia">Agencia</label>
+                    <select class="form-control" id="field_agencia" name="agencia" formControlName="agencia">
+                        <option *ngIf="!editForm.get('agencia').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="agenciaOption.id === editForm.get('agencia').value?.id ? editForm.get('agencia').value : agenciaOption" *ngFor="let agenciaOption of agencias; trackBy: trackAgenciaById">{{agenciaOption.nomeAgencia}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('agencia').invalid && (editForm.get('agencia').dirty || editForm.get('agencia').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('agencia').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

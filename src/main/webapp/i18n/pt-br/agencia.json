@@ -1,0 +1,25 @@
+{
+  "freejobApp": {
+    "agencia": {
+      "home": {
+        "title": "Agencias",
+        "createLabel": "Criar novo Agencia",
+        "createOrEditLabel": "Criar ou editar Agencia",
+        "notFound": "Nenhum Agencia encontrado"
+      },
+      "created": "Um novo Agencia foi criado com o identificador {{ param }}",
+      "updated": "Um Agencia foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Agencia foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Agencia {{ id }}?"
+      },
+      "detail": {
+        "title": "Agencia"
+      },
+      "nomeAgencia": "Nome Agencia",
+      "contatoAgencia": "Contato Agencia",
+      "email": "Email",
+      "job": "Job"
+    }
+  }
+}

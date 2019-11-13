@@ -1,0 +1,108 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "io.freejob",
+      "nativeLanguage": "pt-br"
+    },
+    "jhipsterVersion": "6.5.0",
+    "applicationType": "monolith",
+    "baseName": "freejob",
+    "packageName": "io.freejob",
+    "packageFolder": "io/freejob",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "gradle",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NzY2YjlmMDM5YmVkNDEyMjk3OTlmMjQ2NDk5MzZlMDExOTgyOTlkZTFlZDU1NjNkNWY3YmI1NTM3ODhmOGFlZjhkZjQ3ZDIxNTZhMjVjODEwMWUyMTQwNDgzN2FjYzFlMjY5ZDhkMDc3ZGNkNDIxNDY4YTBkZDk2YTRiNTk0YzM=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [
+      {
+        "name": "generator-jhipster-nav-element",
+        "version": "2.1.13"
+      },
+      {
+        "name": "generator-jhipster-docker",
+        "version": "2.5.0"
+      },
+      {
+        "name": "generator-jhipster-primeng",
+        "version": "3.0.0"
+      },
+      {
+        "name": "generator-jhipster-swagger-cli",
+        "version": "3.0.1"
+      },
+      {
+        "name": "generator-jhipster-primeng-charts",
+        "version": "1.2.0"
+      },
+      {
+        "name": "generator-jhipster-audit-helper",
+        "version": "1.0.3"
+      },
+      {
+        "name": "generator-jhipster-angular-material-integration",
+        "version": "1.0.17"
+      },
+      {
+        "name": "generator-jhipster-administration-database",
+        "version": "1.0.4"
+      },
+      {
+        "name": "generator-jhipster-kutilang",
+        "version": "0.0.9"
+      },
+      {
+        "name": "@xiges/generator-jhipster-firebase",
+        "version": "0.0.5"
+      },
+      {
+        "name": "generator-jhipster-social-login-api",
+        "version": "0.0.1"
+      },
+      {
+        "name": "generator-jhipster-blog",
+        "version": "0.0.2"
+      },
+      {
+        "name": "generator-jhipster-file2url",
+        "version": "0.0.0"
+      }
+    ],
+    "enableTranslation": true,
+    "nativeLanguage": "pt-br",
+    "languages": ["pt-br"],
+    "blueprints": []
+  },
+  "generator-jhipster-kutilang": {
+    "promptValues": {
+      "directoryPath": "C:\\Temp\\freejob",
+      "packageName": "io.freejob"
+    },
+    "appsName": "freejob",
+    "packageName": "io.freejob",
+    "directoryPath": "C:\\Temp\\freejob",
+    "packageFolder": "C:\\Temp\\freejob",
+    "android": "java",
+    "ios": "swift",
+    "stateManageType": "basic"
+  }
+}

@@ -1,0 +1,55 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-local-heading" jhiTranslate="freejobApp.local.home.createOrEditLabel">Create or edit a Local</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.local.nomeLocal" for="field_nomeLocal">Nome Local</label>
+                    <input type="text" class="form-control" name="nomeLocal" id="field_nomeLocal"
+                           formControlName="nomeLocal"/>
+                    <div *ngIf="editForm.get('nomeLocal').invalid && (editForm.get('nomeLocal').dirty || editForm.get('nomeLocal').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nomeLocal').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nomeLocal').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 50 }">
+                        This field cannot be longer than 50 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.local.tipoLocal" for="field_tipoLocal">Tipo Local</label>
+                    <select class="form-control" name="tipoLocal" formControlName="tipoLocal" id="field_tipoLocal">
+                        <option value="BAR">{{'freejobApp.TipoLocal.BAR' | translate}}</option>
+                        <option value="RESTAURANTE">{{'freejobApp.TipoLocal.RESTAURANTE' | translate}}</option>
+                        <option value="ESTADIO">{{'freejobApp.TipoLocal.ESTADIO' | translate}}</option>
+                        <option value="BUFFET">{{'freejobApp.TipoLocal.BUFFET' | translate}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="freejobApp.local.evento" for="field_evento">Evento</label>
+                    <select class="form-control" id="field_evento" name="evento" formControlName="evento">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="eventoOption.id === editForm.get('evento').value?.id ? editForm.get('evento').value : eventoOption" *ngFor="let eventoOption of eventos; trackBy: trackEventoById">{{eventoOption.nomeEvento}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

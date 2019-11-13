@@ -1,0 +1,10 @@
+{
+  "freejobApp": {
+    "TipoPagamento": {
+      "null": "",
+      "DINHEIRO": "DINHEIRO",
+      "TRANSFERENCIA": "TRANSFERENCIA",
+      "CARTAO": "CARTAO"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+DEFAULT_MIN_LENGTH = 4
+DEFAULT_MAX_LENGTH = 50
+
+entity Job {
+	nomeJob String required unique maxlength(100),
+    valorHora Long,
+    tempoEvento Long,
+    observacao String,
+    dataPagamento Instant,
+    tipoPagamento TipoPagamento,
+    statusPagamento Boolean
+}
+
+entity Agencia {
+	nomeAgencia String required unique maxlength(DEFAULT_MAX_LENGTH),
+    contatoAgencia String,
+    email String
+}
+
+entity Evento {
+	nomeEvento String required unique maxlength(DEFAULT_MAX_LENGTH),
+    descricaEvento String,
+    dataInicio Instant required,
+    dataFim Instant required,
+    statusJob Boolean,
+    tipoEvento TipoEvento
+}
+
+entity Local {
+	nomeLocal String required unique maxlength(DEFAULT_MAX_LENGTH),
+    tipoLocal TipoLocal
+}
+
+entity Endereco {
+  rua String required,
+  numero String,
+  complemento String,
+  bairro String,
+  cep String,
+  cidade String,
+  estado String
+}
+
+enum TipoPagamento {
+ DINHEIRO, TRANSFERENCIA, CARTAO
+}
+
+enum TipoEvento {
+ PANFLETAGEM, FESTA, CASAMENTO, FORMATURA
+}
+
+enum TipoLocal {
+ BAR, RESTAURANTE, ESTADIO, BUFFET
+}
+
+relationship OneToOne {
+Endereco{local(nomeLocal)} to Local
+Local{evento(nomeEvento)} to Evento
+Evento{job(nomeJob)} to Job
+}
+
+relationship OneToMany {
+Agencia{job} to Job{agencia(nomeAgencia) required}
+}
+
+filter Job, Agencia, Evento, Local, Endereco
+
+paginate Job, Agencia, Evento, Local, Endereco with pagination
+
+service all with serviceImpl

@@ -1,0 +1,84 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="freejobApp.job.home.title">Jobs</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-job" [routerLink]="['/job/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="freejobApp.job.home.createLabel">
+            Create a new Job
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="jobs?.length === 0">
+        <span jhiTranslate="freejobApp.job.home.notFound">No jobs found</span>
+    </div>
+    <div class="table-responsive" *ngIf="jobs?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="nomeJob"><span jhiTranslate="freejobApp.job.nomeJob">Nome Job</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="valorHora"><span jhiTranslate="freejobApp.job.valorHora">Valor Hora</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="tempoEvento"><span jhiTranslate="freejobApp.job.tempoEvento">Tempo Evento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="observacao"><span jhiTranslate="freejobApp.job.observacao">Observacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="dataPagamento"><span jhiTranslate="freejobApp.job.dataPagamento">Data Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="tipoPagamento"><span jhiTranslate="freejobApp.job.tipoPagamento">Tipo Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="statusPagamento"><span jhiTranslate="freejobApp.job.statusPagamento">Status Pagamento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="agencia.nomeAgencia"><span jhiTranslate="freejobApp.job.agencia">Agencia</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let job of jobs ;trackBy: trackId">
+                <td><a [routerLink]="['/job', job.id, 'view' ]">{{job.id}}</a></td>
+                <td>{{job.nomeJob}}</td>
+                <td>{{job.valorHora}}</td>
+                <td>{{job.tempoEvento}}</td>
+                <td>{{job.observacao}}</td>
+                <td>{{job.dataPagamento | date:'medium'}}</td>
+                <td jhiTranslate="{{'freejobApp.TipoPagamento.' + job.tipoPagamento}}">{{job.tipoPagamento}}</td>
+                <td>{{job.statusPagamento}}</td>
+                <td>
+                    <div *ngIf="job.agencia">
+                        <a [routerLink]="['/agencia', job.agencia?.id, 'view' ]" >{{job.agencia?.nomeAgencia}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/job', job.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/job', job.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/job', { outlets: { popup: job.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="jobs?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

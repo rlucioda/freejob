@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="agencia">
+            <h2><span jhiTranslate="freejobApp.agencia.detail.title">Agencia</span> {{agencia.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="freejobApp.agencia.nomeAgencia">Nome Agencia</span></dt>
+                <dd>
+                    <span>{{agencia.nomeAgencia}}</span>
+                </dd>
+                <dt><span jhiTranslate="freejobApp.agencia.contatoAgencia">Contato Agencia</span></dt>
+                <dd>
+                    <span>{{agencia.contatoAgencia}}</span>
+                </dd>
+                <dt><span jhiTranslate="freejobApp.agencia.email">Email</span></dt>
+                <dd>
+                    <span>{{agencia.email}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/agencia', agencia.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+export const enum TipoEvento {
+  PANFLETAGEM = 'PANFLETAGEM',
+  FESTA = 'FESTA',
+  CASAMENTO = 'CASAMENTO',
+  FORMATURA = 'FORMATURA'
+}

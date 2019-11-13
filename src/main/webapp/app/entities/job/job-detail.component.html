@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="job">
+            <h2><span jhiTranslate="freejobApp.job.detail.title">Job</span> {{job.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="freejobApp.job.nomeJob">Nome Job</span></dt>
+                <dd>
+                    <span>{{job.nomeJob}}</span>
+                </dd>
+                <dt><span jhiTranslate="freejobApp.job.valorHora">Valor Hora</span></dt>
+                <dd>
+                    <span>{{job.valorHora}}</span>
+                </dd>
+                <dt><span jhiTranslate="freejobApp.job.tempoEvento">Tempo Evento</span></dt>
+                <dd>
+                    <span>{{job.tempoEvento}}</span>
+                </dd>
+                <dt><span jhiTranslate="freejobApp.job.observacao">Observacao</span></dt>
+                <dd>
+                    <span>{{job.observacao}}</span>
+                </dd>
+                <dt><span jhiTranslate="freejobApp.job.dataPagamento">Data Pagamento</span></dt>
+                <dd>
+                    <span>{{job.dataPagamento}}</span>
+                </dd>
+                <dt><span jhiTranslate="freejobApp.job.tipoPagamento">Tipo Pagamento</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'freejobApp.TipoPagamento.' + job.tipoPagamento}}">{{job.tipoPagamento}}</span>
+                </dd>
+                <dt><span jhiTranslate="freejobApp.job.statusPagamento">Status Pagamento</span></dt>
+                <dd>
+                    <span>{{job.statusPagamento}}</span>
+                </dd>
+                <dt><span jhiTranslate="freejobApp.job.agencia">Agencia</span></dt>
+                <dd>
+                    <div *ngIf="job.agencia">
+                        <a [routerLink]="['/agencia', job.agencia?.id, 'view']">{{job.agencia?.nomeAgencia}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/job', job.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

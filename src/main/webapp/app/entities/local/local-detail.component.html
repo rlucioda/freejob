@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="local">
+            <h2><span jhiTranslate="freejobApp.local.detail.title">Local</span> {{local.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="freejobApp.local.nomeLocal">Nome Local</span></dt>
+                <dd>
+                    <span>{{local.nomeLocal}}</span>
+                </dd>
+                <dt><span jhiTranslate="freejobApp.local.tipoLocal">Tipo Local</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'freejobApp.TipoLocal.' + local.tipoLocal}}">{{local.tipoLocal}}</span>
+                </dd>
+                <dt><span jhiTranslate="freejobApp.local.evento">Evento</span></dt>
+                <dd>
+                    <div *ngIf="local.evento">
+                        <a [routerLink]="['/evento', local.evento?.id, 'view']">{{local.evento?.nomeEvento}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/local', local.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

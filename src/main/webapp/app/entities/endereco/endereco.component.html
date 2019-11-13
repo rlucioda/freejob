@@ -1,0 +1,84 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="freejobApp.endereco.home.title">Enderecos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-endereco" [routerLink]="['/endereco/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="freejobApp.endereco.home.createLabel">
+            Create a new Endereco
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="enderecos?.length === 0">
+        <span jhiTranslate="freejobApp.endereco.home.notFound">No enderecos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="enderecos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="rua"><span jhiTranslate="freejobApp.endereco.rua">Rua</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="numero"><span jhiTranslate="freejobApp.endereco.numero">Numero</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="complemento"><span jhiTranslate="freejobApp.endereco.complemento">Complemento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="bairro"><span jhiTranslate="freejobApp.endereco.bairro">Bairro</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="cep"><span jhiTranslate="freejobApp.endereco.cep">Cep</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="cidade"><span jhiTranslate="freejobApp.endereco.cidade">Cidade</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="estado"><span jhiTranslate="freejobApp.endereco.estado">Estado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="local.nomeLocal"><span jhiTranslate="freejobApp.endereco.local">Local</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let endereco of enderecos ;trackBy: trackId">
+                <td><a [routerLink]="['/endereco', endereco.id, 'view' ]">{{endereco.id}}</a></td>
+                <td>{{endereco.rua}}</td>
+                <td>{{endereco.numero}}</td>
+                <td>{{endereco.complemento}}</td>
+                <td>{{endereco.bairro}}</td>
+                <td>{{endereco.cep}}</td>
+                <td>{{endereco.cidade}}</td>
+                <td>{{endereco.estado}}</td>
+                <td>
+                    <div *ngIf="endereco.local">
+                        <a [routerLink]="['/local', endereco.local?.id, 'view' ]" >{{endereco.local?.nomeLocal}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/endereco', endereco.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/endereco', endereco.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/endereco', { outlets: { popup: endereco.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="enderecos?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>
